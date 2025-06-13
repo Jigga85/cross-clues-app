@@ -32,17 +32,29 @@ grid_labels_rows = ['1', '2', '3', '4', '5']
 # --- DISPLAY ENHANCED GRID WITH LABELS AND AXIS WORDS ---
 st.markdown("### 🗺️ Game Grid with Axis Words")
 
-grid_matrix = [['' for _ in range(7)] for _ in range(7)]
+# Create a clean 6x6 grid
+# Row 0 = header row, Col 0 = header column
+# grid[0][0] = "" (top-left corner)
+# grid[0][1:] = column letters
+# grid[1:][0] = row numbers
+# grid[1:][1] = row words
+# grid[0][1:] = column letters
+# grid[1][1:] = column words
+
+grid_matrix = [['' for _ in range(6)] for _ in range(6)]
 
 # Fill in column labels
 for j, col in enumerate(grid_labels_cols):
-    grid_matrix[0][j + 2] = col
-    grid_matrix[1][j + 2] = st.session_state.column_words[j]
+    grid_matrix[0][j + 1] = col
+
+# Fill in column words
+for j, word in enumerate(st.session_state.column_words):
+    grid_matrix[1][j + 1] = word
 
 # Fill in row labels and row words
 for i, row in enumerate(grid_labels_rows):
-    grid_matrix[i + 2][0] = row
-    grid_matrix[i + 2][1] = st.session_state.row_words[i]
+    grid_matrix[i + 1][0] = row
+    grid_matrix[i + 1][1] = st.session_state.row_words[i]
 
 # Convert to DataFrame
 formatted_grid = pd.DataFrame(grid_matrix).fillna('')
