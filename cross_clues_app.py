@@ -48,7 +48,7 @@ for i, row in enumerate(grid_labels_rows):
 # Convert to DataFrame
 formatted_grid = pd.DataFrame(grid_matrix).fillna('')
 formatted_grid.index = [''] * 7
-formatted_grid.columns = [''] * 7
+formatted_grid.columns = [f'\u00a0{i}' for i in range(7)]  # non-breaking space + index
 
 # Display as static table to prevent resizing/hiding
 st.table(formatted_grid)
