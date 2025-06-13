@@ -47,15 +47,9 @@ for i, row in enumerate(grid_labels_rows):
 
 # Convert to DataFrame
 formatted_grid = pd.DataFrame(grid_matrix).fillna('')
-formatted_grid.columns = [f' {i} ' for i in range(7)]  # Unique but visually minimal
-formatted_grid.index = [''] * 7
 
-# Use Streamlit dataframe without styling to prevent errors
-st.dataframe(
-    formatted_grid,
-    height=350,
-    use_container_width=True
-)
+# Display as static table to prevent resizing/hiding
+st.table(formatted_grid)
 
 # --- CLUE-GIVER SECTION ---
 st.markdown("### 🎯 Clue-Giver")
