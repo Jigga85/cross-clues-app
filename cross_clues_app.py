@@ -29,23 +29,26 @@ if "column_words" not in st.session_state:
 grid_labels_cols = ['A', 'B', 'C', 'D', 'E']
 grid_labels_rows = ['1', '2', '3', '4', '5']
 
-# --- DISPLAY 7x7 GRID WITH AXIS WORDS ---
+# --- DISPLAY ENHANCED GRID WITH LABELS AND AXIS WORDS ---
 st.markdown("### 🗺️ Game Grid with Axis Words")
 
 grid_matrix = [['' for _ in range(7)] for _ in range(7)]
 
-# Insert column headers
-for i, col in enumerate(grid_labels_cols):
-    grid_matrix[0][i + 2] = col
-    grid_matrix[1][i + 2] = st.session_state.column_words[i]
+# Top-left cell left empty
+# Fill in column labels
+for j, col in enumerate(grid_labels_cols):
+    grid_matrix[0][j + 2] = col
+    grid_matrix[1][j + 2] = st.session_state.column_words[j]
 
-# Insert row headers
+# Fill in row labels
 for i, row in enumerate(grid_labels_rows):
     grid_matrix[i + 2][0] = row
     grid_matrix[i + 2][1] = st.session_state.row_words[i]
 
 # Convert to DataFrame
 formatted_grid = pd.DataFrame(grid_matrix)
+formatted_grid.columns = [''] * 7
+formatted_grid.index = [''] * 7
 st.table(formatted_grid)
 
 # --- CLUE-GIVER SECTION ---
