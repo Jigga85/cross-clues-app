@@ -32,12 +32,12 @@ grid_labels_rows = ['1', '2', '3', '4', '5']
 # --- DISPLAY ENHANCED GRID WITH LABELS AND AXIS WORDS ---
 st.markdown("### 🗺️ Game Grid with Axis Words")
 
-grid_matrix = [['' for _ in range(6)] for _ in range(7)]
+grid_matrix = [['' for _ in range(7)] for _ in range(7)]
 
 # Fill in column labels
 for j, col in enumerate(grid_labels_cols):
-    grid_matrix[0][j + 1] = col
-    grid_matrix[1][j + 1] = st.session_state.column_words[j]
+    grid_matrix[0][j + 2] = col
+    grid_matrix[1][j + 2] = st.session_state.column_words[j]
 
 # Fill in row labels and row words
 for i, row in enumerate(grid_labels_rows):
