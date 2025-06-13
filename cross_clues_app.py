@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import pandas as pd
 
 st.set_page_config(page_title="Cross Clues Lite", layout="centered")
 
@@ -31,26 +32,24 @@ grid_labels_rows = ['1', '2', '3', '4', '5']
 # --- DISPLAY COLUMN AND ROW WORDS ---
 st.markdown("### 📋 Word Axes")
 
-col_table = "| Column | Word |
-|--------|------|"
+col_table = "| Column | Word |\n|--------|------|"
 for i, letter in enumerate(grid_labels_cols):
     col_table += f"\n| {letter} | {st.session_state.column_words[i]} |"
 st.markdown(col_table)
 
-row_table = "| Row | Word |
-|-----|------|"
+row_table = "| Row | Word |\n|-----|------|"
 for i, number in enumerate(grid_labels_rows):
     row_table += f"\n| {number} | {st.session_state.row_words[i]} |"
 st.markdown(row_table)
 
-# --- DISPLAY EMPTY GRID ---
+# --- DISPLAY EMPTY GRID AS TABLE ---
 st.markdown("### 🗺️ Grid Coordinates")
-grid_table = "| | A | B | C | D | E |
-|--|--|--|--|--|--|"
-for row in grid_labels_rows:
-    row_str = f"| {row} | " + " | ".join([" " for _ in grid_labels_cols]) + " |"
-    grid_table += f"\n{row_str}"
-st.markdown(grid_table)
+blank_grid = pd.DataFrame(
+    [['' for _ in grid_labels_cols] for _ in grid_labels_rows],
+    index=grid_labels_rows,
+    columns=grid_labels_cols
+)
+st.table(blank_grid)
 
 # --- CLUE-GIVER SECTION ---
 st.markdown("### 🎯 Clue-Giver")
