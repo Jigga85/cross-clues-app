@@ -45,11 +45,25 @@ for i, row in enumerate(grid_labels_rows):
     grid_matrix[i + 2][0] = row
     grid_matrix[i + 2][1] = st.session_state.row_words[i]
 
-# Convert to DataFrame
+# Convert to DataFrame and style it
 formatted_grid = pd.DataFrame(grid_matrix)
 formatted_grid.columns = [''] * 7
 formatted_grid.index = [''] * 7
-st.table(formatted_grid)
+
+# Use Streamlit dataframe with styling
+st.dataframe(
+    formatted_grid.style.set_properties(
+        **{
+            'text-align': 'center',
+            'font-weight': 'bold'
+        }
+    ).set_table_styles([
+        {'selector': 'th', 'props': [('text-align', 'center')]},
+        {'selector': 'td', 'props': [('text-align', 'center')]}
+    ]),
+    height=350,
+    use_container_width=True
+)
 
 # --- CLUE-GIVER SECTION ---
 st.markdown("### 🎯 Clue-Giver")
